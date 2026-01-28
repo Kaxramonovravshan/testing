@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { auth } from "./firebase.config";
 import {
   createUserWithEmailAndPassword,
@@ -15,14 +15,14 @@ const SignUp = () => {
 
   const signUser = () => {
     createUserWithEmailAndPassword(auth, user.email, user.password).then(
-      (res) => {
+      () => {
         n("/");
       },
     );
   };
 
   function signGoogle() {
-    signInWithPopup(auth, googleP).then((res) => {
+    signInWithPopup(auth, googleP).then(() => {
       n("/");
     });
   }

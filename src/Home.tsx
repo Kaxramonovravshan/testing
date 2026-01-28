@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getDocs,
   collection,
@@ -16,6 +16,8 @@ interface User {
   isMarried: boolean;
   id?: string;
 }
+
+type UserDB = Omit<User, "id">;
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,24 +51,26 @@ const Home = () => {
 
   function submit() {
     if (current === null) {
-      addDoc(collection(db, "users"), user)
-        .then((res) => {
+      addDoc(collection(db, "users"), user as UserDB)
+        .then(() => {
           getUsers();
         })
-        .catch((err) => {
+        .catch(() => {
           alert("Ruycatdan uting");
           n("/sign-up");
         });
     } else {
-      updateDoc(doc(collection(db, "users"), current), user).then((res) => {
-        getUsers();
-        setCurrent(null);
-      });
+      updateDoc(doc(collection(db, "users"), current), user as UserDB).then(
+        () => {
+          getUsers();
+          setCurrent(null);
+        },
+      );
     }
   }
 
   function delItem(id: string) {
-    deleteDoc(doc(collection(db, "users"), id)).then((res) => {
+    deleteDoc(doc(collection(db, "users"), id)).then(() => {
       getUsers();
     });
   }
