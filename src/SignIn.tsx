@@ -15,7 +15,9 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
 
   const git = new GithubAuthProvider();
+  git.setCustomParameters({ allow_signup: "true" });
   const google = new GoogleAuthProvider();
+  google.setCustomParameters({ prompt: "select_account" });
   const apple = new OAuthProvider("apple.com");
 
   useEffect(() => {
