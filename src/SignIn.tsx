@@ -5,6 +5,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
+  signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "./firebase.config";
 
@@ -29,7 +30,7 @@ const SignIn = () => {
   }
 
   function signApple() {
-    signInWithPopup(auth, apple).then(() => {
+    signInWithRedirect(auth, apple).then(() => {
       alert("apple");
     });
   }
