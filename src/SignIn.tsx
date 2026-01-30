@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
-  signInWithPopup,
   GithubAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
@@ -56,9 +55,9 @@ const SignIn = () => {
   }
 
   function signApple() {
-    signInWithRedirect(auth, apple).then(()=>{
-        alert("apple")
-    })
+    signInWithRedirect(auth, apple).then(() => {
+      alert("apple");
+    });
   }
 
   return (
