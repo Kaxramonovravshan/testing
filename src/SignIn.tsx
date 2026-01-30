@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
-  signInWithPopup,
   GithubAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
