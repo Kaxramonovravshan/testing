@@ -3,6 +3,7 @@ import Home from "./Home";
 import SignUp from "./SignUp";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase.config";
+import SignIn from "./SignIn";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
       </Routes>
     </div>
   );
