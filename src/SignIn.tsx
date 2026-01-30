@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   OAuthProvider,
   signInWithRedirect,
+  getRedirectResult,
 } from "firebase/auth";
 import { auth } from "./firebase.config";
 
@@ -16,6 +17,19 @@ const SignIn = () => {
   const git = new GithubAuthProvider();
   const google = new GoogleAuthProvider();
   const apple = new OAuthProvider("apple.com");
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          console.log("USER:", result.user);
+          alert("Login success ✅");
+        }
+      })
+      .catch((err) => {
+        console.error("Redirect error:", err);
+      });
+  }, []);
 
   function signUser() {
     signInWithEmailAndPassword(auth, email, password)
@@ -29,21 +43,22 @@ const SignIn = () => {
       });
   }
 
-  function signApple() {
-    signInWithRedirect(auth, apple).then(() => {
-      alert("apple");
-    });
-  }
   function signGoogle() {
-    signInWithPopup(auth, google).then(() => {
+    signInWithRedirect(auth, google).then(() => {
       alert("google");
     });
   }
 
   function signGitHub() {
-    signInWithPopup(auth, git).then(() => {
+    signInWithRedirect(auth, git).then(() => {
       alert("git hub");
     });
+  }
+
+  function signApple() {
+    signInWithRedirect(auth, apple).then(()=>{
+        alert("apple")
+    })
   }
 
   return (
